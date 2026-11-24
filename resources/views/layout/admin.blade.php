@@ -11,16 +11,16 @@
   <meta name="author" content="Admin SiPerdu">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="{{asset ('assetsAdmin/images/favicon.ico')}}">
+  <link rel="icon" type="image/png" href="{{asset('assetsAdmin/images/favicon.ico')}}">
 
   <!-- Local Third-Party Libraries (100% Offline Compatible) -->
-  <link rel="stylesheet" href="{{asset ('assetsAdmin/libs/bootstrap/css/bootstrap.min.css')}}">
-  <link rel="stylesheet" href="{{asset ('assetsAdmin/libs/bootstrap-icons/bootstrap-icons.css') }}">
-  <link rel="stylesheet" href="{{ asset ('assetsAdmin/libs/apexcharts/apexcharts.css') }}">
-  <link rel="stylesheet" href="{{ asset ('assetsAdmin/libs/flatpickr/flatpickr.min.css') }}">
+  <link rel="stylesheet" href="{{asset('assetsAdmin/libs/bootstrap/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('assetsAdmin/libs/bootstrap-icons/bootstrap-icons.css') }}">
+  <link rel="stylesheet" href="{{ asset('assetsAdmin/libs/apexcharts/apexcharts.css') }}">
+  <link rel="stylesheet" href="{{ asset('assetsAdmin/libs/flatpickr/flatpickr.min.css') }}">
 
   <!-- Main Design System & Custom Stylesheet -->
-  <link rel="stylesheet" href="{{ asset ('assetsAdmin/css/main.css') }}">
+  <link rel="stylesheet" href="{{ asset('assetsAdmin/css/main.css') }}">
   @stack('styles')
 </head>
 
@@ -136,26 +136,34 @@
           <button class="navbar-profile-btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
             aria-expanded="false" id="profile-dropdown">
             <img src="{{ asset('assetsAdmin/images/avatar.png') }}" alt="Profile Image" class="navbar-profile-img">
-            <span class="navbar-profile-name d-none d-md-inline">Administrator</span>
+            <span class="navbar-profile-name d-none d-md-inline">{{ Auth::user()->name }}</span>
             <i class="bi bi-chevron-down navbar-profile-caret"></i>
           </button>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-profile" aria-labelledby="profile-dropdown">
-            <li class="dropdown-header">Welcome !</li>
-            <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> My Account</a></li>
-            <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Settings</a></li>
-            <li><a class="dropdown-item" href="#"><i class="bi bi-lock"></i> Lock Screen</a></li>
+            <li class="dropdown-header">Halo, {{ Auth::user()->name }}</li>
+            <li><a class="dropdown-item" href="{{ route('profile.edit') }}"><i class="bi bi-person"></i> Profil
+                Saya</a></li>
+            <li><a class="dropdown-item" href="{{ route('user.beranda') }}"><i class="bi bi-house"></i> Lihat
+                Website</a></li>
             <li>
               <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item text-danger" href="page-login.html"><i class="bi bi-box-arrow-right"></i>
-                Logout</a></li>
+            <li>
+              <form action="{{ route('logout') }}" method="POST">
+                @csrf
+                <a class="dropdown-item text-danger" href="{{ route('logout') }}"
+                  onclick="event.preventDefault(); this.closest('form').submit();">
+                  <i class="bi bi-box-arrow-right"></i> Logout
+                </a>
+              </form>
+            </li>
           </ul>
         </div>
       </div>
     </header>
     <!-- END: Top Navbar Component -->
 
-        <!-- START: Page Header Banner -->
+    <!-- START: Page Header Banner -->
     <div class="page-header">
       <div>
         <h1 class="page-title"> @yield('title') </h1>
@@ -198,12 +206,12 @@
          ========================================== -->
 
   <!-- Local Third-Party Libraries Script dependencies -->
-  <script src="{{ asset ('assetsAdmin/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-  <script src="{{ asset ('assetsAdmin/libs/apexcharts/apexcharts.min.js') }}"></script>
-  <script src="{{ asset ('assetsAdmin/libs/flatpickr/flatpickr.min.js') }}"></script>
+  <script src="{{ asset('assetsAdmin/libs/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ asset('assetsAdmin/libs/apexcharts/apexcharts.min.js') }}"></script>
+  <script src="{{ asset('assetsAdmin/libs/flatpickr/flatpickr.min.js') }}"></script>
 
   <!-- Local dashboard interactions controller -->
-  <script src="{{ asset ('assetsAdmin/js/dashboard.js') }}"></script>
+  <script src="{{ asset('assetsAdmin/js/dashboard.js') }}"></script>
   @stack('scripts')
 </body>
 
